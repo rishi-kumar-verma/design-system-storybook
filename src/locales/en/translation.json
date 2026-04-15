@@ -4,5 +4,17 @@
   },
   "button": {
     "submit": "Submit"
+  },
+  "theme": {
+    "toggle": "Toggle Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "current": "Current Theme: {{theme}}"
+  },
+  "language": {
+    "toggle": "Toggle Language",
+    "english": "English",
+    "bengali": "Bengali",
+    "current": "Current Language: {{language}}"
   }
 }

@@ -4,5 +4,17 @@
   },
   "button": {
     "submit": "জমা দিন"
+  },
+  "theme": {
+    "toggle": "থিম টগল করুন",
+    "light": "হালকা",
+    "dark": "অন্ধকার",
+    "current": "বর্তমান থিম: {{theme}}"
+  },
+  "language": {
+    "toggle": "ভাষা টগল করুন",
+    "english": "ইংরেজি",
+    "bengali": "বাংলা",
+    "current": "বর্তমান ভাষা: {{language}}"
   }
 }

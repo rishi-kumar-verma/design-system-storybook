@@ -15,7 +15,6 @@ const meta = {
     backgroundColor: { control: 'color' },
     size: { control: 'select', options: ['small', 'medium', 'large'] },
     primary: { control: 'boolean' },
-    disabled: { control: 'boolean' },
     label: { control: 'text' },
   },
   args: { onClick: fn() },
@@ -48,13 +47,6 @@ export const Small: Story = {
   args: {
     size: 'small',
     label: 'Button',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    label: 'Disabled',
   },
 };
 
