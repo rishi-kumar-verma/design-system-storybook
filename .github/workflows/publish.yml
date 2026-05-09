@@ -1,0 +1,48 @@
+name: Publish packages
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Publish packages to GitHub Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Configure GitHub Packages auth
+        # Uses a personal access token stored in repo secrets. Add secret named `PACKAGE_PUBLISH_TOKEN`.
+        run: |
+          echo "@freeformation:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PACKAGE_PUBLISH_TOKEN }}" >> ~/.npmrc
+
+      - name: Install
+        run: pnpm install -w
+
+      - name: Build packages
+        run: pnpm -w -r build
+
+      - name: Publish components
+        run: pnpm --filter @freeformation/ds-components publish --registry https://npm.pkg.github.com/ --access public
+
+      - name: Publish tokens
+        run: pnpm --filter @freeformation/ds-tokens publish --registry https://npm.pkg.github.com/ --access public

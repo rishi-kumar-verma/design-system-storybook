@@ -72,6 +72,15 @@ importers:
 
   packages/tokens: {}
 
+  sample-project:
+    dependencies:
+      '@freeformation/ds-components':
+        specifier: file:freeformation-ds-components-0.3.0.tgz
+        version: file:sample-project/freeformation-ds-components-0.3.0.tgz
+      '@freeformation/ds-tokens':
+        specifier: file:freeformation-ds-tokens-0.3.0.tgz
+        version: file:sample-project/freeformation-ds-tokens-0.3.0.tgz
+
 packages:
 
   '@alloc/quick-lru@5.2.0':
@@ -826,6 +835,14 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+
+  '@freeformation/ds-components@file:sample-project/freeformation-ds-components-0.3.0.tgz':
+    resolution: {integrity: sha512-Vm4xO57pa5cfKSJaRjJ8zPUK9Kk2IRIjkapUhuVrAxxG9qADhPXtmRcsIJzUvJyJ3m3e3YB3fv5ib4U8FFWrmA==, tarball: file:sample-project/freeformation-ds-components-0.3.0.tgz}
+    version: 0.3.0
+
+  '@freeformation/ds-tokens@file:sample-project/freeformation-ds-tokens-0.3.0.tgz':
+    resolution: {integrity: sha512-dgFt/VqEjn1BHM0g19R3t7Xi3WxZ4dcT/QE7WnF5RPlzQrRmLXyVsGm4gp9GWzeRRpYEk8s48no2wrbhjUWLvQ==, tarball: file:sample-project/freeformation-ds-tokens-0.3.0.tgz}
+    version: 0.3.0
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -5447,6 +5464,10 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
 
   '@floating-ui/utils@0.2.11': {}
+
+  '@freeformation/ds-components@file:sample-project/freeformation-ds-components-0.3.0.tgz': {}
+
+  '@freeformation/ds-tokens@file:sample-project/freeformation-ds-tokens-0.3.0.tgz': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
