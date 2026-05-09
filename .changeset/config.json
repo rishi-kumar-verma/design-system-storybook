@@ -1,10 +1,9 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
-  "changelog": [
-    "@changesets/cli/changelog", { "repo": "" }
-  ],
+  "$schema": "https://unpkg.com/@changesets/config@latest/schema.json",
+  "changelog": ["@changesets/cli/changelog", { "repo": "your-org/your-repo" }],
   "commit": false,
+  "fixed": [],
   "linked": [],
-  "access": "restricted",
+  "access": "public",
   "baseBranch": "main"
 }

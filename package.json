@@ -1,39 +1,29 @@
 {
-  "name": "freeformation-monorepo",
+  "name": "design-system",
   "private": true,
-  "type": "module",
   "version": "0.0.0",
-  "description": "Design system monorepo using pnpm workspaces",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "plop/*"
+  ],
   "scripts": {
-    "dev": "pnpm --filter @freeformation/storybook storybook",
-    "build": "pnpm -r build",
-    "build:storybook": "pnpm --filter @freeformation/storybook build-storybook",
-    "lint": "pnpm -r lint",
-    "test": "pnpm -r test",
-    "test:unit": "pnpm -r test:unit",
-    "format": "prettier --write .",
-    "chromatic": "pnpm --filter @freeformation/storybook chromatic",
-    "changeset": "changeset",
-    "changeset:version": "changeset version",
-    "release": "changeset publish",
-    "prepare": "husky"
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "storybook": "pnpm --filter storybook run dev"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.0",
-    "@commitlint/cli": "^20.5.3",
-    "@commitlint/config-conventional": "^20.5.3",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "prettier": "^3.5.0"
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "pnpm": "^8.0.0",
+    "turbo": "^1.10.0",
+    "typescript": "6.0.3"
   },
-  "lint-staged": {
-    "**/*.{ts,tsx,js,jsx}": [
-      "eslint --fix"
-    ],
-    "**/*.{ts,tsx,js,jsx,json,md}": [
-      "prettier --write"
-    ]
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "scheduler": "0.26.0"
   }
 }
-
-

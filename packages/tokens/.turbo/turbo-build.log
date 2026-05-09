@@ -1,0 +1,4 @@
+
+> @freeformation/ds-tokens@0.0.0 build C:\Users\rishi\OneDrive\Documents\code-playground\design-system-storybook\packages\tokens
+> tsc -p tsconfig.build.json
+

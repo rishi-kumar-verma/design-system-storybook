@@ -1,0 +1,4 @@
+
+> @freeformation/ds-components@0.0.0 build C:\Users\rishi\OneDrive\Documents\code-playground\design-system-storybook\packages\components
+> tsc -p tsconfig.build.json
+

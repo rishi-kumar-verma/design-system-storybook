@@ -1,0 +1,8 @@
+{
+  "name": "@freeformation/ds-tokens",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  }
+}

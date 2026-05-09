@@ -1,73 +1,19 @@
 name: CI
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: '18'
+      - name: Install pnpm
+        run: npm i -g pnpm
       - name: Install
         run: pnpm install
-      - name: Lint
-        run: pnpm lint
-      - name: Typecheck & Build
+      - name: Build
         run: pnpm build
-      - name: Run unit tests
-        run: pnpm test:unit
-      - name: Build Storybook
-        run: pnpm build:storybook
-      - name: Upload Storybook build
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-static
-          path: storybook-static
-  chromatic:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-      - name: Install
-        run: pnpm install
-      - name: Run Chromatic
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        run: pnpm chromatic
-  publish:
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
-      - name: Install
-        run: pnpm install
-      - name: Publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm changeset publish

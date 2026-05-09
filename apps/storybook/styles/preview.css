@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Small storybook tweaks */
+body {
+  padding: 16px;
+  background: white;
+}
