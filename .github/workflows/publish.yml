@@ -1,48 +1,39 @@
-name: Publish packages
+name: Publish Package
 
 on:
   push:
     branches:
       - main
-    tags:
-      - 'v*'
+  workflow_dispatch:
 
 jobs:
   publish:
-    name: Publish packages to GitHub Packages
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20
+          cache: 'pnpm'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - name: Install pnpm
+        run: npm install -g pnpm
 
-      - name: Configure GitHub Packages auth
-        # Uses a personal access token stored in repo secrets. Add secret named `PACKAGE_PUBLISH_TOKEN`.
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Publish to GitHub Packages
+        env:
+          PACKAGE_PUBLISH_TOKEN: ${{ secrets.PACKAGE_PUBLISH_TOKEN }}
         run: |
-          echo "@freeformation:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PACKAGE_PUBLISH_TOKEN }}" >> ~/.npmrc
-
-      - name: Install
-        run: pnpm install -w
-
-      - name: Build packages
-        run: pnpm -w -r build
-
-      - name: Publish components
-        run: pnpm --filter @freeformation/ds-components publish --registry https://npm.pkg.github.com/ --access public
-
-      - name: Publish tokens
-        run: pnpm --filter @freeformation/ds-tokens publish --registry https://npm.pkg.github.com/ --access public
+          pnpm --filter @freeformation/ds-components publish \
+            --registry https://npm.pkg.github.com/ \
+            --access public \
+            --no-git-checks

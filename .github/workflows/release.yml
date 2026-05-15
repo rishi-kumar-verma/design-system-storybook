@@ -1,17 +1,24 @@
 name: Release
+
 on:
   push:
     branches: [ main ]
+
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Node
         uses: pnpm/action-setup@v2
         with:
           version: 8
-      - run: pnpm install
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Create release from changesets
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -20,3 +27,9 @@ jobs:
           git add -A
           git commit -m "chore(release): version packages" || echo "no changes"
           git push --follow-tags
+
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PUBLISH_TOKEN }}
+        run: |
+          npx changeset publish
