@@ -1,5 +1,5 @@
  WARN  Issue while reading "C:\Users\rishi\OneDrive\Documents\code-playground\design-system-storybook\.npmrc". Failed to replace env in config: ${PACKAGE_PUBLISH_TOKEN}
 
-> @freeformation/ds-tokens@0.2.0 build C:\Users\rishi\OneDrive\Documents\code-playground\design-system-storybook\packages\tokens
+> @freeformation/ds-tokens@0.3.0 build C:\Users\rishi\OneDrive\Documents\code-playground\design-system-storybook\packages\tokens
 > tsc -p tsconfig.build.json
 
