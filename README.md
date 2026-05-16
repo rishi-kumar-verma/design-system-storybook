@@ -131,3 +131,21 @@ pnpm install -w
 - Tokens package: [packages/tokens](packages/tokens)
 
 If you'd like, I can also add a simple `docs/DEVELOPMENT.md` with expanded troubleshooting logs and a `Makefile`/task that wraps common commands. Want me to add that?
+
+
+
+Next steps for you
+
+Ensure the secret PACKAGE_PUBLISH_TOKEN exists in the repository Secrets (has write:packages scope).
+Merge a release PR (or run the release workflow) — npx changeset version will create tags and npx changeset publish will publish with the token.
+If you want to trigger the standalone publish workflow (manual), open Actions → Publish Package → Run workflow and provide a tag or create a vX.Y.Z tag to auto-run it.
+
+npx changeset version
+
+pnpm install --frozen-lockfile
+pnpm build
+npx changeset version
+git tag -a v0.3.1 -m "test publish tag"
+git show-ref --tags
+
+git push origin v0.3.1
