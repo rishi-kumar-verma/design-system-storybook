@@ -23,8 +23,17 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: Verify pnpm
+        run: pnpm -v
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
+
+      - name: Configure npm auth for GitHub Packages
+        if: ${{ secrets.PACKAGE_PUBLISH_TOKEN != '' }}
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PACKAGE_PUBLISH_TOKEN }}" >> ~/.npmrc
+          echo "Configured npm auth from secret"
 
       - name: Build package
         run: pnpm build
